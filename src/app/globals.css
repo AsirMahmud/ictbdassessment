@@ -1,27 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Shared MediBook landing-page language for authenticated workspaces. */
+.admin-theme,
+.portal-theme {
+  --medibook-green: #008a5e;
+  --medibook-green-dark: #007550;
+  --medibook-ink: #15241b;
+  --medibook-muted: #71827a;
+  --medibook-mint: #e8f8f0;
+}
+
+.admin-theme .bg-slate-100 {
+  background-color: #f8fbf9;
+}
+
+.admin-theme .bg-slate-50 {
+  background-color: #f3faf6;
+}
+
+.admin-theme .border-slate-200,
+.admin-theme .border-slate-100 {
+  border-color: #e4eee9;
+}
+
+.admin-theme .text-slate-900 {
+  color: #15241b;
+}
+
+.admin-theme .text-slate-500,
+.admin-theme .text-slate-400 {
+  color: #71827a;
+}
+
+.admin-theme .text-teal-600,
+.admin-theme .text-teal-700,
+.admin-theme .text-teal-800 {
+  color: #008a5e;
+}
+
+.admin-theme .bg-teal-50 {
+  background-color: #e8f8f0;
+}
+
+.admin-theme .border-teal-200 {
+  border-color: #bfe5d0;
+}
+
+.admin-theme input:focus,
+.admin-theme select:focus,
+.admin-theme textarea:focus {
+  outline: none;
+  border-color: #008a5e;
+  box-shadow: 0 0 0 3px rgb(0 138 94 / 0.14);
+}
+
+.portal-theme .text-stone-800,
+.portal-theme .text-stone-900 {
+  color: #15241b;
+}
+
+.portal-theme .text-stone-500,
+.portal-theme .text-stone-400,
+.portal-theme .text-stone-600 {
+  color: #71827a;
+}
+
+.portal-theme .border-stone-200,
+.portal-theme .border-stone-300,
+.portal-theme .border-stone-100 {
+  border-color: #e4eee9;
+}
+
+.portal-theme .bg-stone-50 {
+  background-color: #f3faf6;
+}
+
+/* Keep legacy portal utility classes on the same green scale as the landing page. */
+.portal-theme [class*="bg-[#1B3B2B]"] {
+  background-color: #008a5e !important;
+}
+
+.portal-theme [class*="bg-[#1B3B2B]"]:hover {
+  background-color: #007550 !important;
+}
+
+.portal-theme [class*="bg-[#132A1F]"] {
+  background-color: #007550 !important;
+}
+
+.portal-theme [class*="bg-[#2B4B3B]"] {
+  background-color: #007550 !important;
+}
+
+.portal-theme [class*="text-[#1B3B2B]"] {
+  color: #008a5e !important;
+}
+
+.portal-theme [class*="border-[#1B3B2B]"] {
+  border-color: #008a5e !important;
+}
+
+.portal-theme [class*="bg-[#FAF9F5]"] {
+  background-color: #f3faf6 !important;
+}
+
+.portal-theme input:focus,
+.portal-theme select:focus,
+.portal-theme textarea:focus {
+  outline: none;
+  border-color: #008a5e;
+  box-shadow: 0 0 0 3px rgb(0 138 94 / 0.14);
+}
+
+/* Custom refined scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
