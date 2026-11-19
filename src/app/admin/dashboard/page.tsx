@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import AdminHeader from "@/components/admin/AdminHeader";
 import {
   Stethoscope,
@@ -104,100 +105,133 @@ export default function AdminDashboardPage() {
                 </h3>
                 <p className="text-xs text-slate-400">Patients waiting or in consultation</p>
               </div>
-              <span className="text-xs font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
-                {doctorAppointments.length} Tokens Active
-              </span>
-            </div>
-
-            <div className="divide-y divide-slate-100 max-h-80 overflow-y-auto">
-              {doctorAppointments.map((appt) => (
-                <div key={appt.id} className="py-3 flex items-center justify-between text-xs">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-teal-50 border border-teal-200 rounded-xl flex flex-col items-center justify-center font-bold text-teal-800">
-                      <span className="text-[9px]">TOKEN</span>
-                      <span className="text-base leading-none">#{appt.token_number}</span>
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-sm">{appt.patient_name}</p>
-                      <p className="text-slate-500 text-[11px]">
-                        Consultant: <strong className="text-teal-700">{appt.doctor_name}</strong> ({appt.doctor_room})
-                      </p>
-                      <p className="text-slate-400 text-[10px]">
-                        {appt.appointment_date} at {appt.time_slot} | Ph: {appt.phone}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="text-right space-y-1">
-                    <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        appt.status === "COMPLETED"
-                          ? "bg-emerald-100 text-emerald-800"
-                          : appt.status === "IN_CONSULTATION"
-                          ? "bg-amber-100 text-amber-800 animate-pulse"
-                          : "bg-slate-100 text-slate-700"
-                      }`}
-                    >
-                      {appt.status}
-                    </span>
-                    <p className="text-xs font-bold text-slate-900">${appt.consultation_fee}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Diagnostic Orders Activity */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
-            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-              <div>
-                <h3 className="font-extrabold text-sm text-slate-900 flex items-center space-x-2">
-                  <Microscope className="w-4 h-4 text-indigo-600" />
-                  <span>Recent Diagnostic Test Orders</span>
-                </h3>
-                <p className="text-xs text-slate-400">Specimens and clinical test requests</p>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
+                  {doctorAppointments.length} Tokens Active
+                </span>
+                <Link
+                  href="/admin/opd"
+                  className="text-xs font-semibold text-teal-700 hover:text-teal-900 transition-colors"
+                >
+                  View All &rarr;
+                </Link>
               </div>
-              <span className="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200">
-                {orders.length} Orders
-              </span>
             </div>
 
-            <div className="divide-y divide-slate-100 max-h-80 overflow-y-auto">
-              {orders.map((ord) => (
-                <div key={ord.id} className="py-3 flex items-center justify-between text-xs">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-mono font-bold text-slate-900">{ord.order_number}</span>
-                      <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                          ord.status === "COMPLETED"
-                            ? "bg-emerald-100 text-emerald-800"
-                            : ord.status === "RESULTS_ENTERED"
-                            ? "bg-amber-100 text-amber-800"
-                            : "bg-slate-100 text-slate-700"
-                        }`}
-                      >
-                        {ord.status}
+                      <div className="divide-y divide-slate-100 max-h-[460px] overflow-y-auto pr-3 custom-scrollbar">
+                        {doctorAppointments.length === 0 ? (
+                          <div className="py-8 text-center text-xs text-slate-400">
+                            No active chamber tokens currently dispatched.
+                          </div>
+                        ) : (
+                          doctorAppointments.map((appt) => (
+                            <div
+                              key={appt.id}
+                              className="py-3 flex items-center justify-between text-xs hover:bg-slate-50/80 px-2 -mx-2 rounded-xl transition-colors"
+                            >
+                              <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-teal-50 border border-teal-200 rounded-xl flex flex-col items-center justify-center font-bold text-teal-800 shrink-0">
+                                  <span className="text-[9px]">TOKEN</span>
+                                  <span className="text-base leading-none">#{appt.token_number}</span>
+                                </div>
+                                <div>
+                                  <p className="font-bold text-slate-900 text-sm">{appt.patient_name}</p>
+                                  <p className="text-slate-500 text-[11px]">
+                                    Consultant: <strong className="text-teal-700">{appt.doctor_name}</strong> ({appt.doctor_room})
+                                  </p>
+                                  <p className="text-slate-400 text-[10px]">
+                                    {appt.appointment_date} at {appt.time_slot} | Ph: {appt.phone}
+                                  </p>
+                                </div>
+                              </div>
+
+                                <div className="text-right space-y-1 shrink-0 pl-3">
+                                  <span
+                                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${appt.status === "COMPLETED"
+                                        ? "bg-emerald-100 text-emerald-800"
+                                        : appt.status === "IN_CONSULTATION"
+                                          ? "bg-amber-100 text-amber-800 animate-pulse"
+                                          : "bg-slate-100 text-slate-700"
+                                      }`}
+                                  >
+                                    {appt.status}
+                                  </span>
+                                  <p className="text-xs font-bold text-slate-900">${appt.consultation_fee}</p>
+                                </div>
+                              </div>
+                        ))
+              )}
+                      </div>
+                    </div>
+
+                    {/* Diagnostic Orders Activity */}
+                    <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+                      <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+                        <div>
+                          <h3 className="font-extrabold text-sm text-slate-900 flex items-center space-x-2">
+                            <Microscope className="w-4 h-4 text-indigo-600" />
+                            <span>Recent Diagnostic Test Orders</span>
+                          </h3>
+                          <p className="text-xs text-slate-400">Specimens and clinical test requests</p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200">
+                            {orders.length} Orders
+                          </span>
+                          <Link
+                            href="/admin/lab"
+                            className="text-xs font-semibold text-indigo-700 hover:text-indigo-900 transition-colors"
+                          >
+                            View All &rarr;
+                          </Link>
+                        </div>
+                      </div>
+
+                                  <div className="divide-y divide-slate-100 max-h-[460px] overflow-y-auto pr-3 custom-scrollbar">
+                                    {orders.length === 0 ? (
+                                      <div className="py-8 text-center text-xs text-slate-400">
+                                        No diagnostic test orders found.
+                                      </div>
+                                    ) : (
+                                      orders.map((ord) => (
+                  <div
+                    key={ord.id}
+                    className="py-3 flex items-center justify-between text-xs hover:bg-slate-50/80 px-2 -mx-2 rounded-xl transition-colors"
+                  >
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-mono font-bold text-slate-900">{ord.order_number}</span>
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            ord.status === "COMPLETED"
+                              ? "bg-emerald-100 text-emerald-800"
+                              : ord.status === "RESULTS_ENTERED"
+                              ? "bg-amber-100 text-amber-800"
+                              : "bg-slate-100 text-slate-700"
+                          }`}
+                        >
+                          {ord.status}
+                        </span>
+                      </div>
+                      <p className="text-slate-700 font-semibold mt-0.5">{ord.patient_name} ({ord.patient_uhid})</p>
+                      <p className="text-slate-400 text-[10px]">
+                        Referred By: {ord.referring_doctor}
+                      </p>
+                    </div>
+
+                    <div className="text-right shrink-0 pl-3">
+                      <p className="font-bold text-slate-900">${ord.invoice?.total?.toFixed(2) || "0.00"}</p>
+                      <span className="text-[10px] text-slate-400">
+                        {ord.items?.length || 0} Investigations
                       </span>
                     </div>
-                    <p className="text-slate-700 font-semibold mt-0.5">{ord.patient_name} ({ord.patient_uhid})</p>
-                    <p className="text-slate-400 text-[10px]">
-                      Referred By: {ord.referring_doctor}
-                    </p>
                   </div>
-
-                  <div className="text-right">
-                    <p className="font-bold text-slate-900">${ord.invoice?.total?.toFixed(2) || "0.00"}</p>
-                    <span className="text-[10px] text-slate-400">
-                      {ord.items?.length || 0} Investigations
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                                  ))
+              )}
+                              </div>
+                            </div>
+                          </div>
       </div>
-    </div>
-  );
+                    </div>
+                    );
 }

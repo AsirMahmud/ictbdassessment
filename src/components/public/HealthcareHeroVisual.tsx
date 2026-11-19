@@ -46,7 +46,7 @@ export default function HealthcareHeroVisual({ onBookClick }: HealthcareHeroVisu
           <div className="absolute -top-12 -left-12 w-48 h-48 bg-white/60 rounded-full blur-2xl pointer-events-none" />
         </div>
 
-        {/* Doctor Photo (Newly generated professional doctor in lab coat with stethoscope) */}
+        {/* Doctor Photo (Professional verified doctor in lab coat with stethoscope) */}
         <div className="relative z-10 w-[88%] h-[92%] rounded-[38px] overflow-hidden shadow-2xl border-2 border-white/80 bg-white">
           <img
             src="/hero-doctor.jpg"

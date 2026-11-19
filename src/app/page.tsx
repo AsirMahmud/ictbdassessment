@@ -663,14 +663,23 @@ export default function PublicLandingPage() {
               >
                 {/* Doctor Head Info */}
                 <div className="space-y-3">
-                  {/* Photo Container */}
-                  <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 relative border border-gray-100">
-                    <img
-                      src={doc.avatar_url || "/doctor-1.jpg"}
-                      alt={doc.name}
-                      className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-300"
-                    />
-                    <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-700 shadow-2xs flex items-center space-x-1">
+                  {/* Doctor Avatar Logo Container */}
+                  <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-tr from-[#E8F8F0] via-[#F0FAF5] to-white relative border border-emerald-100/80 flex flex-col items-center justify-center p-4">
+                    <div className="relative">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#008A5E] to-[#0D9488] flex flex-col items-center justify-center text-white shadow-md shadow-emerald-700/20">
+                        <Stethoscope className="w-7 h-7 sm:w-9 sm:h-9 text-white" />
+                        <span className="text-[10px] sm:text-xs font-black tracking-wider mt-0.5">
+                          {(doc.name || "").replace("Dr. ", "").split(" ").map((w: string) => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase() || "DR"}
+                        </span>
+                      </div>
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-white flex items-center justify-center shadow-xs border border-emerald-200">
+                        <ShieldCheck className="w-4 h-4 text-[#008A5E]" />
+                      </div>
+                    </div>
+                    <span className="mt-2 text-[11px] font-bold text-emerald-800 tracking-wider uppercase">
+                      {doc.department || "Specialist"}
+                    </span>
+                    <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-700 shadow-2xs flex items-center space-x-1 border border-gray-100">
                       <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                       <span>{doc.rating || "4.9"}</span>
                       <span className="text-gray-400 font-normal">({doc.review_count || "1.2k"})</span>
